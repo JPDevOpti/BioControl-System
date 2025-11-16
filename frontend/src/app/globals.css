@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: var(--font-poppins), 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+  font-family: var(--font-poppins), 'Poppins', system-ui, -apple-system, sans-serif !important;
+}
+
+/* Contenedor de tarjeta principal */
+.surface-card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md;
+}
+
+/* Gradiente de texto */
+.text-gradient {
+  background: linear-gradient(135deg, theme('colors.emerald.600'), theme('colors.teal.400'));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Anillos de enfoque consistentes */
+*:focus-visible {
+  @apply outline-none ring-2 ring-emerald-500 ring-offset-2 ring-offset-slate-50;
+}
+
