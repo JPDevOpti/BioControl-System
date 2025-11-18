@@ -41,3 +41,7 @@ coverage/
 *.tgz
 *.tar.gz
 
+# Sistema antiguo y archivos Excel
+SIstemaAntiguoHechoenVUE/
+SistemaAnteriroExcel/
+

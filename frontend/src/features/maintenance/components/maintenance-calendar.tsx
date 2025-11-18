@@ -77,21 +77,6 @@ export function MaintenanceCalendar({
                   <span className="font-bold text-cyan-800">{month.preventivos}</span>
                 </div>
 
-                {/* Correctivos */}
-                <div 
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    onShowEvents?.(month.number, 'Correctivo')
-                  }}
-                  className="flex items-center justify-between text-sm p-2 rounded-md bg-orange-50/50 border border-orange-100/50 cursor-pointer hover:bg-orange-50/70 transition-colors"
-                >
-                  <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-orange-600" />
-                    <span className="text-slate-700 font-medium">Correctivos</span>
-                  </div>
-                  <span className="font-bold text-orange-600">{month.correctivos}</span>
-                </div>
-
                 {/* Calibraciones */}
                 <div 
                   onClick={(e) => {
@@ -105,6 +90,21 @@ export function MaintenanceCalendar({
                     <span className="text-slate-700 font-medium">Calibraciones</span>
                   </div>
                   <span className="font-bold text-emerald-600">{month.calibraciones}</span>
+                </div>
+
+                {/* Correctivos */}
+                <div 
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onShowEvents?.(month.number, 'Correctivo')
+                  }}
+                  className="flex items-center justify-between text-sm p-2 rounded-md bg-orange-50/50 border border-orange-100/50 cursor-pointer hover:bg-orange-50/70 transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    <AlertTriangle className="w-4 h-4 text-orange-600" />
+                    <span className="text-slate-700 font-medium">Correctivos</span>
+                  </div>
+                  <span className="font-bold text-orange-600">{month.correctivos}</span>
                 </div>
               </div>
 

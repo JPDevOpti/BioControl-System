@@ -3,6 +3,7 @@
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import { Cpu } from 'lucide-react'
 import type { EquipmentFormData } from '../types'
 
 interface OperatingConditionsSectionProps {
@@ -14,12 +15,15 @@ export function OperatingConditionsSection({ formData, setFormData }: OperatingC
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
       <div className="border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 px-8 py-6 text-center">
-        <h2 className="text-xl font-bold text-slate-900">Condiciones de funcionamiento</h2>
+        <h2 className="text-xl font-bold text-slate-900 flex items-center justify-center gap-2">
+          <Cpu className="h-5 w-5" />
+          Condiciones de funcionamiento
+        </h2>
         <p className="text-sm text-slate-600 mt-1">Especificaciones técnicas y requisitos operativos</p>
       </div>
       
       <div className="p-8 space-y-6">
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-3">
           <div className="space-y-3">
             <Label className="text-sm font-semibold text-slate-700">Voltaje</Label>
             <Input
@@ -74,7 +78,7 @@ export function OperatingConditionsSection({ formData, setFormData }: OperatingC
             />
           </div>
 
-          <div className="space-y-3 md:col-span-2">
+          <div className="space-y-3 md:col-span-3">
             <Label className="text-sm font-semibold text-slate-700">Otros</Label>
             <Textarea
               value={formData.otherConditions}

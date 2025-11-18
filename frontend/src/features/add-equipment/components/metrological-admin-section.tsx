@@ -3,6 +3,7 @@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { YesNoToggle } from '@/components/ui/yes-no-toggle'
+import { CalendarClock } from 'lucide-react'
 import type { EquipmentFormData } from '../types'
 
 interface MetrologicalAdminSectionProps {
@@ -14,7 +15,10 @@ export function MetrologicalAdminSection({ formData, setFormData }: Metrological
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
       <div className="border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 px-8 py-6 text-center">
-        <h2 className="text-xl font-bold text-slate-900">Información metrológica administrativa</h2>
+        <h2 className="text-xl font-bold text-slate-900 flex items-center justify-center gap-2">
+          <CalendarClock className="h-5 w-5" />
+          Información metrológica administrativa
+        </h2>
         <p className="text-sm text-slate-600 mt-1">Datos de mantenimiento y calibración</p>
       </div>
       

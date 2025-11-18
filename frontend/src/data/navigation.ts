@@ -8,14 +8,14 @@ export const mainNav: NavItem[] = [
   { label: 'Panel general', href: '/dashboard', icon: 'layout' },
   { label: 'Ingresar equipo', href: '/add-equipment', icon: 'packagePlus' },
   { label: 'Editar equipo', href: '/edit-equipment', icon: 'package-search' },
-  { label: 'Inventario', href: '/inventory', icon: 'boxes' },
-  { label: 'Mantenimiento', href: '/maintenance', icon: 'calendar' },
+  { label: 'Listado de equipos', href: '/inventory', icon: 'boxes' },
+  { label: 'Cronograma', href: '/maintenance', icon: 'calendar' },
+  { label: 'Facturación', href: '/statistics', icon: 'hand-coins' },
   { label: 'Soporte', href: '/support', icon: 'message-circle-question-mark' },
   { label: 'Mi perfil', href: '/profile', icon: 'user' }
 ]
 
 export const secondaryNav: NavItem[] = [
-  { label: 'Documentación', href: '#', icon: 'book' },
-  { label: 'Configuración', href: '#', icon: 'settings' }
+  { label: 'Documentación', href: '#', icon: 'book' }
 ]
 

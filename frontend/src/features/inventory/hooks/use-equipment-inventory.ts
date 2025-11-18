@@ -33,7 +33,7 @@ const DEFAULT_FILTERS: EquipmentFiltersState = {
   riskClass: 'all'
 }
 
-const PAGE_SIZE = 8
+const PAGE_SIZE = 50
 
 const uniqueValues = <K extends keyof EquipmentRecord>(key: K) => {
   return Array.from(new Set(equipmentInventory.map((item) => item[key] as string))).sort()

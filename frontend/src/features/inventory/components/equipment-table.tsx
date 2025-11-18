@@ -13,12 +13,14 @@ import {
   Image as ImageIcon,
   MapPin,
   Package2,
-  PencilLine,
+  PackageSearch,
   Building2 as Hospital,
   ShieldCheck,
   ShieldX,
   User
 } from 'lucide-react'
+import { EquipmentImageModal } from './equipment-image-modal'
+import { EquipmentDetailsModal } from './equipment-details-modal'
 
 interface EquipmentTableProps {
   equipment: EquipmentRecord[]
@@ -232,25 +234,6 @@ const desktopColumns: ColumnConfig[] = [
       </Badge>
     )
   },
-  {
-    key: 'actions',
-    label: 'Acciones',
-    width: '7%',
-    align: 'center',
-    render: () => (
-      <div className="flex items-center justify-center gap-2">
-        <button className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-emerald-200 hover:text-emerald-600" aria-label="Gestionar imágenes">
-          <ImageIcon className="h-4 w-4" />
-        </button>
-        <button className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-amber-200 hover:text-amber-600" aria-label="Editar registro">
-          <PencilLine className="h-4 w-4" />
-        </button>
-        <button className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-emerald-200 hover:text-emerald-600" aria-label="Ver hoja de vida">
-          <FileText className="h-4 w-4" />
-        </button>
-      </div>
-    )
-  }
 ]
 
 export function EquipmentTable({
@@ -266,7 +249,61 @@ export function EquipmentTable({
   emptyMessage = 'No se encontraron equipos con los filtros aplicados.'
 }: EquipmentTableProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [imageModalOpen, setImageModalOpen] = useState(false)
+  const [lifeSheetModalOpen, setLifeSheetModalOpen] = useState(false)
+  const [selectedEquipment, setSelectedEquipment] = useState<EquipmentRecord | null>(null)
   const selectAllRef = useRef<HTMLInputElement>(null)
+
+  const handleViewImage = (item: EquipmentRecord) => {
+    setSelectedEquipment(item)
+    setImageModalOpen(true)
+  }
+
+  const handleEdit = (item: EquipmentRecord) => {
+    // Navegar a la página de edición
+    window.location.href = `/inventory/${item.id}/edit`
+  }
+
+  const handleViewLifeSheet = (item: EquipmentRecord) => {
+    setSelectedEquipment(item)
+    setLifeSheetModalOpen(true)
+  }
+
+  // Columna de acciones con acceso a los handlers
+  const actionsColumn = {
+    key: 'actions',
+    label: 'Acciones',
+    width: '7%',
+    align: 'center' as const,
+    render: (item: EquipmentRecord) => (
+      <div className="flex items-center justify-center gap-2">
+        <button 
+          onClick={() => handleViewImage(item)}
+          className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-emerald-200 hover:text-emerald-600" 
+          aria-label="Gestionar imágenes"
+        >
+          <ImageIcon className="h-4 w-4" />
+        </button>
+        <button 
+          onClick={() => handleEdit(item)}
+          className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-amber-200 hover:text-amber-600" 
+          aria-label="Buscar detalles del equipo"
+        >
+          <PackageSearch className="h-4 w-4" />
+        </button>
+        <button 
+          onClick={() => handleViewLifeSheet(item)}
+          className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-emerald-200 hover:text-emerald-600" 
+          aria-label="Ver detalles del equipo"
+        >
+          <FileText className="h-4 w-4" />
+        </button>
+      </div>
+    )
+  }
+
+  // Combinar columnas base con columna de acciones
+  const allColumns = [...desktopColumns, actionsColumn]
 
   useEffect(() => {
     setSelectedIds((prev) => prev.filter((id) => equipment.some((item) => item.id === id)))
@@ -359,7 +396,7 @@ export function EquipmentTable({
               <table className="min-w-full table-auto text-sm">
                 <colgroup>
                   <col style={{ width: '2%' }} />
-                  {desktopColumns.map((column) => (
+                  {allColumns.map((column) => (
                     <col key={column.key} style={{ width: column.width }} />
                   ))}
                 </colgroup>
@@ -370,7 +407,7 @@ export function EquipmentTable({
                         <Checkbox ref={selectAllRef} checked={isAllSelected} onChange={toggleSelectAll} aria-label="Seleccionar todos" />
                       </div>
                     </th>
-                    {desktopColumns.map((column) => (
+                    {allColumns.map((column) => (
                       <th
                         key={column.key}
                         className={cn(
@@ -391,7 +428,7 @@ export function EquipmentTable({
                           <Checkbox checked={selectedIds.includes(item.id)} onChange={() => toggleSelect(item.id)} aria-label={`Seleccionar ${item.name}`} />
                         </div>
                       </td>
-                      {desktopColumns.map((column) => (
+                      {allColumns.map((column) => (
                         <td
                           key={column.key}
                           className={cn('px-4 py-4 align-middle text-slate-700', column.align === 'center' ? 'text-center' : 'text-left')}
@@ -488,13 +525,25 @@ export function EquipmentTable({
                       </div>
                     </div>
                     <div className="mt-3 flex items-center justify-center gap-2">
-                      <button className="rounded-xl border border-slate-200 p-2 text-slate-500">
+                      <button 
+                        onClick={() => handleViewImage(item)}
+                        className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-emerald-200 hover:text-emerald-600"
+                        aria-label="Gestionar imágenes"
+                      >
                         <ImageIcon className="h-4 w-4" />
                       </button>
-                      <button className="rounded-xl border border-slate-200 p-2 text-slate-500">
-                        <PencilLine className="h-4 w-4" />
+                      <button 
+                        onClick={() => handleEdit(item)}
+                        className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-amber-200 hover:text-amber-600"
+                        aria-label="Buscar detalles del equipo"
+                      >
+                        <PackageSearch className="h-4 w-4" />
                       </button>
-                      <button className="rounded-xl border border-slate-200 p-2 text-slate-500">
+                      <button 
+                        onClick={() => handleViewLifeSheet(item)}
+                        className="rounded-xl border border-slate-200 p-2 text-slate-500 transition hover:border-emerald-200 hover:text-emerald-600"
+                        aria-label="Ver detalles del equipo"
+                      >
                         <FileText className="h-4 w-4" />
                       </button>
                     </div>
@@ -530,6 +579,20 @@ export function EquipmentTable({
           </div>
         </div>
       </div>
+
+      {/* Modales */}
+      <EquipmentImageModal
+        isOpen={imageModalOpen}
+        equipment={selectedEquipment}
+        onClose={() => setImageModalOpen(false)}
+      />
+
+      <EquipmentDetailsModal
+        isOpen={lifeSheetModalOpen}
+        equipment={selectedEquipment}
+        onClose={() => setLifeSheetModalOpen(false)}
+        onEdit={handleEdit}
+      />
     </div>
   )
 }

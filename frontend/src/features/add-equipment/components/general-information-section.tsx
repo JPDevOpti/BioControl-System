@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label'
 import { MultiSelect } from '@/components/ui/multi-select'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { cn } from '@/lib/cn'
-import { ImagePlus, X, Tags, MapPin } from 'lucide-react'
+import { ImagePlus, X, Tags, MapPin, FileText } from 'lucide-react'
 import type { EquipmentFormData, IpsClassification, InvimaClassification, MissionAxis } from '../types'
 
 interface GeneralInformationSectionProps {
@@ -27,7 +27,10 @@ export function GeneralInformationSection({
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
       <div className="border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 px-8 py-6 text-center">
-        <h2 className="text-xl font-bold text-slate-900">Información general</h2>
+        <h2 className="text-xl font-bold text-slate-900 flex items-center justify-center gap-2">
+          <FileText className="h-5 w-5" />
+          Información general
+        </h2>
         <p className="text-sm text-slate-600 mt-1">Datos básicos de identificación del equipo</p>
       </div>
       

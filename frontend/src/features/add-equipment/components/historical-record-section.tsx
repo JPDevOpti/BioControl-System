@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { CustomSelect } from '@/components/ui/custom-select'
 import { DateInput } from '@/components/ui/date-input'
+import { History } from 'lucide-react'
 import type { EquipmentFormData, AcquisitionForm } from '../types'
 
 interface HistoricalRecordSectionProps {
@@ -15,7 +16,10 @@ export function HistoricalRecordSection({ formData, setFormData }: HistoricalRec
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
       <div className="border-b border-slate-200 bg-gradient-to-r from-emerald-50 to-teal-50 px-8 py-6 text-center">
-        <h2 className="text-xl font-bold text-slate-900">Registro Histórico</h2>
+        <h2 className="text-xl font-bold text-slate-900 flex items-center justify-center gap-2">
+          <History className="h-5 w-5" />
+          Registro Histórico
+        </h2>
         <p className="text-sm text-slate-600 mt-1">Información de adquisición y garantía del equipo</p>
       </div>
       

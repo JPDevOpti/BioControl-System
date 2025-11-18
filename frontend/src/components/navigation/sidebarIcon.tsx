@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react'
+import type { LucideIcon, LucideProps } from 'lucide-react'
 import {
   LayoutDashboard,
   Boxes,
@@ -10,9 +10,33 @@ import {
   Settings,
   PackagePlus,
   PackageSearch,
+  BarChart3,
+  HandCoins,
   Circle
 } from 'lucide-react'
 import { cn } from '@/lib/cn'
+
+const ChartColumnBigIcon: LucideIcon = ({ className, strokeWidth = 1.5, ...props }: LucideProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    <path d="M3 3v18" />
+    <path d="M3 21h18" />
+    <rect x="7" y="12" width="3.5" height="6" rx="0.8" />
+    <rect x="12" y="8" width="3.5" height="10" rx="0.8" />
+    <rect x="17" y="5" width="3.5" height="13" rx="0.8" />
+  </svg>
+)
 
 const iconMap: Record<string, LucideIcon> = {
   layout: LayoutDashboard,
@@ -24,7 +48,10 @@ const iconMap: Record<string, LucideIcon> = {
   book: BookOpen,
   settings: Settings,
   packagePlus: PackagePlus,
-  'package-search': PackageSearch
+  'package-search': PackageSearch,
+  'bar-chart': BarChart3,
+  'chart-column-big': ChartColumnBigIcon,
+  'hand-coins': HandCoins
 }
 
 interface SidebarIconProps {
